@@ -27,6 +27,7 @@ The user interaction process consists of two stages:
         % equipped with two monomorphisms.
         The graphical reasoning mode would allow to construct the composite of two monomorphisms, and mark it as a monomorphism.
     \end{example}
+    \tableofcontents
 \section{Algebraic specification}
 The algebraic specification consists in two parts:
 \begin{itemize}
@@ -36,14 +37,13 @@ The algebraic specification consists in two parts:
 
 \begin{example}
     \label{ex:proof-mono-alg-spec}
-    Continuing \Cref{ex:proof-mono}, the sort specification would be a list of fours sorts: objects, morphisms, commutative triangles, and monomorphisms 
-    (which form a \textcolor{red}{subsort} of morphisms).
+    Continuing \Cref{ex:proof-mono}, the sort specification would be a list of fours sorts: objects, morphisms, commutative triangles, and monomorphisms.
 One rewriting rule would consist in completing 
 any composable pair of morphism can be completed to a commutative triangle.
 \end{example}
 
 From the user perspective, the algebraic specification mainly consists in drawing diagrams, where certain elements are visually "distinguished" (in this document, we will use the red color, but it could be something else).
-\tableofcontents
+
 
 \subsection{Sort specification}
 The sorts are specified one after the other.
@@ -206,7 +206,7 @@ This sequence is compactified by the software into a single rewriting rule:
 \end{align*}
 By removing distinguished elements, we recover the above rewriting rule \eqref{eq:compo-mono-simplest-rule}.
 
-\subsection{Second-order rewriting rules}
+\subsubsection{Second-order rewriting rules}
 The admissible rewriting rule \eqref{eq:compo-mono-simplest-rule} shows that the composition of two monomorphisms is monomorphic.
 This makes following rewriting rule legitimate:
 \[
