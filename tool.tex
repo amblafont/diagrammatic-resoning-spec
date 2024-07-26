@@ -184,7 +184,7 @@ In this section, we show that the previous set of rewriting rules is enough to b
 
 We start by chaining rewriting rules as follows.
 We use blue to denote a match, and the red color 
-to show the added part, and violet for the match and added part.
+to show the added part, and violet (or orange) for the match and added part.
 \pagebreak
 \begin{align*}
     \allowdisplaybreaks
@@ -195,15 +195,17 @@ to show the added part, and violet for the match and added part.
 \end{align*}
 \begin{question}
     Clearly, this is too complicated... How can we make it simpler?
+    See~\Cref{app:simplified-proof} for some attempts.
     We should offer a way to focus on some subpart of the diagram (for example, elements that depends on some selected parts), hide some stuff.
 \end{question}
 This sequence is compactified by the software into a single rewriting rule:
-\begin{align*}
+\begin{align}
     % YADE DIAGRAM compo-mono-simple-rule.yade
     % GENERATED LATEX
     \input{graphs/compo-mono-simple-rule.tex}
     % END OF GENERATED LATEX
-\end{align*}
+    \label{eq:compo-mono-simple-rule}
+\end{align}
 By removing distinguished elements, we recover the above rewriting rule \eqref{eq:compo-mono-simplest-rule}.
 
 \subsubsection{Second-order rewriting rules}
@@ -233,6 +235,67 @@ Looking for a match can be done at the level of this graph representation.
 A sort specification corresponds to a finite direct category. 
 A diagram with distinguished elements corresponds to a 
 natural transformation between two functors from this category to the category of sets.
+\appendix
+\section{Attempts to simplify the proof that monomorphisms compose}
+The last attempt is pretty convincing; it we require tactics.
+\label{app:simplified-proof}
+\paragraph{Simplifying the above example}
+First we can construct the following associativity rule.
+\begin{align}
+    % YADE DIAGRAM associativity-better.yade
+    % GENERATED LATEX
+    \input{graphs/associativity-better.tex}
+    % END OF GENERATED LATEX
+    \tag{Comp-Assoc}
+    \label{eq:comp-assoc}
+\end{align}
+Let us derive it more carefully.
+\begin{align*}
+    % YADE DIAGRAM compo-mono-ws-2-proof.yade
+    % GENERATED LATEX
+    \input{graphs/compo-mono-ws-2-proof.tex}
+    % END OF GENERATED LATEX
+\end{align*}
+
+We present a second version of the long proof of \eqref{eq:compo-mono-simple-rule}.
+\pagebreak
+\[
+% YADE DIAGRAM compo-mono-ws-2.yade
+% GENERATED LATEX
+\input{graphs/compo-mono-ws-2.tex}
+% END OF GENERATED LATEX
+\]
+\paragraph{A version with a hide primitive}
+\pagebreak
+\[
+% YADE DIAGRAM compo-mono-ws-2-hide.yade
+% GENERATED LATEX
+\input{graphs/compo-mono-ws-2-hide.tex}
+% END OF GENERATED LATEX
+\]
+\paragraph{A version with hide and focus primitives}
+The idea is that we keep all the elements that depend on the selected elements, and hide the rest.
+\pagebreak
+\[
+% YADE DIAGRAM compo-mono-ws-2-focus.yade
+% GENERATED LATEX
+\input{graphs/compo-mono-ws-2-focus.tex}
+% END OF GENERATED LATEX
+\]
+
+Maybe names could help, to remember stuff...
+\paragraph{A version with hide tactical}
+We assume that we have a tactic \textsc{Apply-Hide} that takes as input 
+a rewriting rule, and a set of elements to hide.
+It will apply the rewriting rules greedily on the selected elements,
+and then hide the objects.
+\[
+% YADE DIAGRAM compo-mono-apply-hide.yade
+% GENERATED LATEX
+\input{graphs/compo-mono-apply-hide.tex}
+% END OF GENERATED LATEX
+\]
+
 \end{document}
 \section{leftovers}
 For example, if
@@ -278,6 +341,20 @@ Both of them can be specified by the user.
 \end{itemize}
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
