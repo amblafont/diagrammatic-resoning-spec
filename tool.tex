@@ -2,11 +2,13 @@
 \usepackage{yade}
 \usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage{ebutf8}
 
 \usepackage[nameinlink]{cleveref}
 
 \newtheorem{example}{Example}[section]
 \newtheorem{question}{Question}[section]
+\newtheorem{remark}{Remark}[section]
 \title{Specification of a diagrammatic reasoning tool}
 \author{Ambroise LAFONT}
 \begin{document}
@@ -95,7 +97,22 @@ while the distinguished elements determine how this new sort should be represent
 \subsubsection{First-order rules}
 A rewriting rule is specified as a \emph{rewriting diagram}, where the non distinguished part is the pattern. The idea is that when this pattern is found in the workspace (we call this a \emph{match}), the workspace can be extended with the distinguished part.
 
+\begin{remark}
+    Intuitively, the rewriting diagram is a rule that says: "if you see these (non distinguished) elements, you can add those (distinguished) elements". Logically, it is a formula $∀ .. ∃ .. $.    
+\end{remark}
+
 A rewriting diagram may also include equality tags between elements with the same dependencies (e.g., between two morphisms with the same source and target): those elements will be merged in the extended workspace.
+
+\begin{remark}
+    \label{rem:formula-fo}
+   Logically, it is a formula $∀ .. ∃ .. P $ where $P$ is a cunjunction of equalities between variables introduced by $∀ $.    
+\end{remark}
+\begin{remark}
+    The unique existence property $∀ \vec{x}∃ !\vec{y}  .. P(\vec{x})$ is equivalent to the conjunction of 
+    $ ∀ \vec{x}∃ \vec{y}  P(\vec{x})$ and $∀ \vec{x}/P ∀ \vec{y} ∀ \vec{y}' \vec{y}=\vec{y'} $, where $\vec{x}/P$ is a smaller vector of variables (taking into account the equations in $P$), and thus can be represented by two rewriting diagrams.
+    The software should be able to automatically turn 
+    a unique existence rewriting diagram into two rewriting diagrams.
+\end{remark}
 \begin{example}
     Let us detail the first-order rewriting rules of \Cref{ex:proof-mono-alg-spec}.
 
@@ -218,8 +235,51 @@ This makes following rewriting rule legitimate:
 % END OF GENERATED LATEX
 \]
 Unfortunately, there is no way to deduce this rule using the chaining and pruning mechanisms.
-This motivates what we call \emph{second-order rewriting rules}.
-TODO
+
+The formula that we would like to account is of the following shape:
+\[
+% YADE DIAGRAM mono-so-formula.yade
+% GENERATED LATEX
+\input{graphs/mono-so-formula.tex}
+% END OF GENERATED LATEX
+\] 
+It does not fit the format $∀ .. ∃ .. P$ of our previous rewriting rules (see \Cref{rem:formula-fo}).
+
+This motivates what we call \emph{second-order rewriting rules}, which handles formulae of the shape above, where 
+the second line can occur many time. That is,we handle formulae of the shape $∀ (∀ ∃ .. )^* ∃ .. $.
+    \subsubsection{Third-order order rules and beyond}
+One may worry that second-order rules are not strong enough to capture all the possible rewriting rules that we want. What if we want additional nesting of quantifiers, like the third-order rewriting rule below?
+\begin{equation}
+    \label{eq:third-order}
+∀ x. \left(∀y. (∀z ∃ w.P) ⇒ ∃..Q  \right) 
+⇒ ∃.. R 
+\end{equation}
+In fact, we can "emulate" them with second-order rewriting rules with a trick: we can introduce a new sort, and use it to represent the inner quantifiers\footnote{Intriguingly enough, github copilot correctly guessed the end of this sentence, after I wrote "emulate them".}. 
+
+Let us illustrate this trick with \Cref{eq:third-order}.
+We introduce a new sort $S$ depending on $x,y$ such that
+\begin{equation}
+    \label{eq:sort-equivalence}
+∀ xy\left(∃ s:S(x,y)\   ⇔ \ 
+∀ z ∃ w P\right) 
+\end{equation}
+so that \Cref{eq:third-order} is equivalent to the following second-order rule:
+\[
+    ∀ x. \left(∀y(s:S(x,y)) ∃..Q  \right) ⇒ ∃.. R
+\]
+
+Now, let us explain how we can enforce the equivalence of
+\Cref{eq:sort-equivalence}.
+For the left-to-right implication, a first-order rewriting rule is enough:
+\[
+    ∀ xy (s:S(x,y))z   \ 
+    ∃ w. P
+\]
+For the reverse implication, we can write a second order rewriting rule:
+\[
+    ∀xy(∀ z ∃ w. P)\   ⇒ ∃s:S(x,y)  \
+\]
+
 \section{Internal representation}
 A diagram is stored as a graph: 
 each element in the graph is a node, and each dependency is an edge.
@@ -341,6 +401,8 @@ Both of them can be specified by the user.
 \end{itemize}
 
 \end{document}
+
+
 
 
 
