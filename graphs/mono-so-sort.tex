@@ -1,0 +1,29 @@
+\begin{tikzpicture}[every node/.style={outer sep=0pt,anchor=base,text height=1.2ex, text depth=0.25ex}] 
+\node[inner sep=5pt] (0) at (7.8125em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (1) at (13.020833333333334em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (2) at (18.229166666666668em, -7.8125em) {$:=$} ; 
+\node[inner sep=5pt] (3) at (28.645833333333336em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (4) at (33.85416666666667em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (5) at (23.4375em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (6) at (25.9375em, -7.645832697550456em) {$\textcolor{red}{=}$} ; 
+\path 
+(0) to[fore, black,->, ] node[coordinate](7){} (1) 
+(0) to[fore, red,->, into, ] node[coordinate](8){} (1) 
+(3) to[fore, black,->, into, ] node[coordinate](9){} (4) 
+(5) to[fore, blue,->, curve={ratio=-0.30000000000000004}, ] node[coordinate](10){} (3) 
+(5) to[fore, blue,->, curve={ratio=0.30000000000000004}, ] node[coordinate](11){} (3) 
+(5) to[fore, blue,->, curve={ratio=-0.6}, ] node[coordinate](12){} (4) 
+(3) to[fore, blue,->, cell=0, curve={ratio=-0.30000000000000004}, ] node[coordinate](13){} (12) 
+(3) to[fore, blue,->, cell=0, curve={ratio=0.30000000000000004}, ] node[coordinate](14){} (12) 
+; 
+\path[->, transform shape, every edge quotes/.style={}, scale=0.7] 
+(0) edge["${ }$" auto=left, pos=0.5, fore, red,->, into, ] (1) 
+(0) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (1) 
+(3) edge["${ }$" auto=left, pos=0.5, fore, black,->, into, ] (4) 
+(5) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=-0.30000000000000004}, ] (3) 
+(5) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=0.30000000000000004}, ] (3) 
+(5) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=-0.6}, ] (4) 
+(3) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=-0.30000000000000004}, ] (12) 
+(3) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=0.30000000000000004}, ] (12) 
+; 
+\end{tikzpicture}

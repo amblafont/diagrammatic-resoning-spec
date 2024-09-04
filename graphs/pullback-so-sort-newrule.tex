@@ -1,0 +1,40 @@
+\begin{tikzpicture}[every node/.style={outer sep=0pt,anchor=base,text height=1.2ex, text depth=0.25ex}] 
+\node[inner sep=5pt] (0) at (18.229166666666668em, -13.020833333333334em) {$\bullet$} ; 
+\node[inner sep=5pt] (1) at (23.4375em, -13.020833333333334em) {$\bullet$} ; 
+\node[inner sep=5pt] (2) at (23.4375em, -18.229166666666668em) {$\bullet$} ; 
+\node[inner sep=5pt] (3) at (18.229166666666668em, -18.229166666666668em) {$\bullet$} ; 
+\node[inner sep=5pt] (4) at (13.020833333333334em, -7.8125em) {$\textcolor{blue}{\bullet}$} ; 
+\node[inner sep=5pt] (5) at (15.625em, -10.354166428248089em) {$\textcolor{red}{=}$} ; 
+\node[inner sep=5pt] (6) at (10.026041666666668em, -14.911458094914755em) {(uniqueness)} ; 
+\node[inner sep=5pt] (7) at (18.645833333333336em, -10.354166428248089em) {$\textcolor{red}{=}$} ; 
+\node[inner sep=5pt] (8) at (16.119791666666668em, -13.374999463558197em) {$\textcolor{red}{=}$} ; 
+\path 
+(0) to[fore, black,->, ] node[coordinate](9){} (1) 
+(1) to[fore, black,->, ] node[coordinate](10){} (2) 
+(0) to[fore, black,->, ] node[coordinate](11){} (3) 
+(3) to[fore, black,->, ] node[coordinate](12){} (2) 
+(4) to[fore, blue,->, curve={ratio=0.4}, ] node[coordinate](13){} (3) 
+(4) to[fore, blue,->, curve={ratio=-0.20000000000000004}, ] node[coordinate](14){} (0) 
+(4) to[fore, blue,->, curve={ratio=0.2}, ] node[coordinate](15){} (0) 
+(4) to[fore, blue,->, curve={ratio=-0.4}, ] node[coordinate](16){} (1) 
+(0) to[fore, blue,->, cell=0, curve={ratio=-0.2}, ] node[coordinate](17){} (16) 
+(0) to[fore, blue,->, cell=0, curve={ratio=0.2}, ] node[coordinate](18){} (16) 
+(0) to[fore, blue,->, cell=0, curve={ratio=0.2}, ] node[coordinate](19){} (13) 
+(0) to[fore, blue,->, cell=0, curve={ratio=-0.30000000000000004}, ] node[coordinate](20){} (13) 
+; 
+\path[->, transform shape, every edge quotes/.style={}, scale=0.7] 
+(0) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (1) 
+(1) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (2) 
+(0) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (3) 
+(3) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (2) 
+(4) edge["${ }$" auto=right, pos=0.5, fore, blue,->, curve={ratio=0.4}, ] (3) 
+(4) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=-0.4}, ] (1) 
+(0) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=-0.2}, ] (16) 
+(0) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=0.2}, ] (16) 
+(0) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=0.2}, ] (13) 
+(0) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=-0.30000000000000004}, ] (13) 
+(4) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=-0.20000000000000004}, ] (0) 
+(4) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=0.2}, ] (0) 
+; 
+\pullbackk{3}{0}{1}{draw,black} % 
+\end{tikzpicture}

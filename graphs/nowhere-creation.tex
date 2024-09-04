@@ -1,0 +1,13 @@
+\begin{tikzpicture}[every node/.style={outer sep=0pt,anchor=base,text height=1.2ex, text depth=0.25ex}] 
+\node[inner sep=5pt] (0) at (7.142857142857143em, -7.142857142857143em) {$\textcolor{red}{\bullet}$} ; 
+\node[inner sep=5pt] (1) at (11.904761904761905em, -7.142857142857143em) {$\textcolor{red}{\bullet}$} ; 
+\node[inner sep=5pt] (2) at (16.666666666666668em, -7.142857142857143em) {$\textcolor{red}{\bullet}$} ; 
+\path 
+(0) to[fore, red,->, into, ] node[coordinate](3){} (1) 
+(1) to[fore, red,->, into, ] node[coordinate](4){} (2) 
+; 
+\path[->] 
+(0) edge["${\scriptstyle }$", pos=0.5, fore, red,->, into, ] (1) 
+(1) edge["${\scriptstyle }$", pos=0.5, fore, red,->, into, ] (2) 
+; 
+\end{tikzpicture}

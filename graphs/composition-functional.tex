@@ -1,0 +1,17 @@
+\begin{tikzpicture}[every node/.style={outer sep=0pt,anchor=base,text height=1.2ex, text depth=0.25ex}] 
+\node[inner sep=5pt] (0) at (13.020833333333334em, -13.020833333333334em) {$\bullet$} ; 
+\node[inner sep=5pt] (1) at (18.229166666666668em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (2) at (23.4375em, -13.020833333333334em) {$\bullet$} ; 
+\path 
+(0) to[fore, black,->, ] node[coordinate](3){} (1) 
+(1) to[fore, black,->, ] node[coordinate](4){} (2) 
+(0) to[fore, blue,->, ] node[coordinate](5){} (2) 
+(1) to[fore, red,->, cell=0, ] node[coordinate](6){} (5) 
+; 
+\path[->, transform shape, every edge quotes/.style={}, scale=0.7] 
+(0) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (1) 
+(1) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (2) 
+(0) edge["${ }$" auto=left, pos=0.5, fore, blue,->, ] (2) 
+(1) edge["${ }$" auto=left, pos=0.5, fore, red,->, cell=0, ] (5) 
+; 
+\end{tikzpicture}

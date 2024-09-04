@@ -1,0 +1,33 @@
+\begin{tikzpicture}[every node/.style={outer sep=0pt,anchor=base,text height=1.2ex, text depth=0.25ex}] 
+\node[inner sep=5pt] (0) at (16.666666666666668em, -7.142857142857143em) {$\bullet$} ; 
+\node[inner sep=5pt] (1) at (21.428571428571427em, -7.142857142857143em) {$\bullet$} ; 
+\node[inner sep=5pt] (2) at (26.19047619047619em, -7.142857142857143em) {$\bullet$} ; 
+\node[inner sep=5pt] (3) at (30.952380952380953em, -7.142857142857143em) {$\bullet$} ; 
+\node[inner sep=5pt] (4) at (29.904761904761905em, -2.705357142857143em) {$\textcolor{red}{=}$} ; 
+\path 
+(0) to[fore, black,->, ] node[coordinate](5){} (1) 
+(1) to[fore, black,->, ] node[coordinate](6){} (2) 
+(2) to[fore, black,->, ] node[coordinate](7){} (3) 
+(1) to[fore, black,->, curve={ratio=-0.5}, ] node[coordinate](8){} (3) 
+(0) to[fore, blue,->, curve={ratio=-0.7999999999999999}, ] node[coordinate](9){} (3) 
+(0) to[fore, black,->, curve={ratio=0.5}, ] node[coordinate](10){} (2) 
+(0) to[fore, blue,->, curve={ratio=0.7999999999999999}, ] node[coordinate](11){} (3) 
+(2) to[fore, black,->, cell=0.2, ] node[coordinate](12){} (8) 
+(1) to[fore, black,->, cell=0.2, ] node[coordinate](13){} (9) 
+(1) to[fore, black,->, cell=0.2, ] node[coordinate](14){} (10) 
+(2) to[fore, black,->, cell=0.2, ] node[coordinate](15){} (11) 
+; 
+\path[->] 
+(0) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (1) 
+(1) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (2) 
+(2) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (3) 
+(1) edge["${\scriptstyle }$", pos=0.5, fore, black,->, curve={ratio=-0.5}, ] (3) 
+(0) edge["${\scriptstyle }$", pos=0.5, fore, blue,->, curve={ratio=-0.7999999999999999}, ] (3) 
+(0) edge["${\scriptstyle }$", pos=0.5, fore, black,->, curve={ratio=0.5}, ] (2) 
+(0) edge["${\scriptstyle }$", pos=0.5, fore, blue,->, curve={ratio=0.7999999999999999}, ] (3) 
+(2) edge["${\scriptstyle }$", pos=0.5, fore, black,->, cell=0.2, ] (8) 
+(1) edge["${\scriptstyle }$", pos=0.5, fore, black,->, cell=0.2, ] (9) 
+(1) edge["${\scriptstyle }$", pos=0.5, fore, black,->, cell=0.2, ] (10) 
+(2) edge["${\scriptstyle }$", pos=0.5, fore, black,->, cell=0.2, ] (11) 
+; 
+\end{tikzpicture}

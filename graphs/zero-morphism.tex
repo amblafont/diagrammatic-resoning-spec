@@ -1,0 +1,22 @@
+\begin{tikzpicture}[every node/.style={outer sep=0pt,anchor=base,text height=1.2ex, text depth=0.25ex}] 
+\node[inner sep=5pt] (0) at (7.8125em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (1) at (13.020833333333334em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (2) at (15.46875em, -7.916666666666667em) {$:=$} ; 
+\node[inner sep=5pt] (3) at (18.229166666666668em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (4) at (23.4375em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (5) at (20.833333333333336em, -10.3125em) {$\textcolor{red}{0}$} ; 
+\path 
+(0) to[fore, black,->, ] node[coordinate](6){} (1) 
+(3) to[fore, black,->, ] node[coordinate](7){} (4) 
+(3) to[fore, red,->, ] node[coordinate](8){} (5) 
+(5) to[fore, red,->, ] node[coordinate](9){} (4) 
+(5) to[fore, red,->, cell=0.05, ] node[coordinate](10){} (7) 
+; 
+\path[->, transform shape, every edge quotes/.style={}, scale=0.7] 
+(0) edge["${ \textcolor{red}{0}}$" auto=left, pos=0.5, fore, black,->, ] (1) 
+(3) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (4) 
+(3) edge["${ }$" auto=right, pos=0.5, fore, red,->, ] (5) 
+(5) edge["${ }$" auto=right, pos=0.5, fore, red,->, ] (4) 
+(5) edge["${ }$" auto=left, pos=0.5, fore, red,->, cell=0.05, ] (7) 
+; 
+\end{tikzpicture}

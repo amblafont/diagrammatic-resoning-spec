@@ -1,0 +1,89 @@
+\begin{tikzpicture}[every node/.style={outer sep=0pt,anchor=base,text height=1.2ex, text depth=0.25ex}] 
+\node[inner sep=5pt] (0) at (18.177083333333336em, -14.65624988079071em) {$:=$} ; 
+\node[inner sep=5pt] (1) at (26.5625em, -10.479166607062023em) {$\bullet$} ; 
+\node[inner sep=5pt] (2) at (31.770833333333336em, -10.479166607062023em) {$\bullet$} ; 
+\node[inner sep=5pt] (3) at (31.770833333333336em, -15.687499940395355em) {$\bullet$} ; 
+\node[inner sep=5pt] (4) at (26.5625em, -15.687499940395355em) {$\bullet$} ; 
+\node[inner sep=5pt] (5) at (21.354166666666668em, -5.270833273728689em) {$\textcolor{blue}{\bullet}$} ; 
+\node[inner sep=5pt] (6) at (26.770833333333336em, -22.92708327372869em) {$\bullet$} ; 
+\node[inner sep=5pt] (7) at (31.979166666666668em, -22.92708327372869em) {$\bullet$} ; 
+\node[inner sep=5pt] (8) at (31.979166666666668em, -28.135416607062023em) {$\bullet$} ; 
+\node[inner sep=5pt] (9) at (26.770833333333336em, -28.135416607062023em) {$\bullet$} ; 
+\node[inner sep=5pt] (10) at (21.5625em, -17.718749940395355em) {$\textcolor{blue}{\bullet}$} ; 
+\node[inner sep=5pt] (11) at (24.166666666666668em, -20.312499701976776em) {$\textcolor{red}{=}$} ; 
+\node[inner sep=5pt] (12) at (9.583333333333334em, -12.729166348775228em) {$\bullet$} ; 
+\node[inner sep=5pt] (13) at (14.791666666666668em, -12.729166348775228em) {$\bullet$} ; 
+\node[inner sep=5pt] (14) at (14.791666666666668em, -17.937499682108562em) {$\bullet$} ; 
+\node[inner sep=5pt] (15) at (9.583333333333334em, -17.937499682108562em) {$\bullet$} ; 
+\node[inner sep=5pt] (16) at (36.58854166666667em, -10.765624940395355em) {(existence)} ; 
+\node[inner sep=5pt] (17) at (36.927083333333336em, -23.265624940395355em) {(uniqueness)} ; 
+\path 
+(1) to[fore, black,->, ] node[coordinate](18){} (2) 
+(2) to[fore, black,->, ] node[coordinate](19){} (3) 
+(1) to[fore, black,->, ] node[coordinate](20){} (4) 
+(4) to[fore, black,->, ] node[coordinate](21){} (3) 
+(5) to[fore, blue,->, curve={ratio=-0.2}, ] node[coordinate](22){} (2) 
+(5) to[fore, blue,->, curve={ratio=0.4}, ] node[coordinate](23){} (4) 
+(5) to[fore, blue,->, curve={ratio=0.2}, ] node[coordinate](24){} (3) 
+(5) to[fore, red,->, ] node[coordinate](25){} (1) 
+(6) to[fore, black,->, ] node[coordinate](26){} (7) 
+(7) to[fore, black,->, ] node[coordinate](27){} (8) 
+(6) to[fore, black,->, ] node[coordinate](28){} (9) 
+(9) to[fore, black,->, ] node[coordinate](29){} (8) 
+(10) to[fore, blue,->, curve={ratio=0.4}, ] node[coordinate](30){} (9) 
+(10) to[fore, blue,->, curve={ratio=-0.20000000000000004}, ] node[coordinate](31){} (6) 
+(10) to[fore, blue,->, curve={ratio=0.2}, ] node[coordinate](32){} (6) 
+(10) to[fore, blue,->, curve={ratio=-0.4}, ] node[coordinate](33){} (7) 
+(12) to[fore, black,->, ] node[coordinate](34){} (13) 
+(13) to[fore, black,->, ] node[coordinate](35){} (14) 
+(12) to[fore, black,->, ] node[coordinate](36){} (15) 
+(15) to[fore, black,->, ] node[coordinate](37){} (14) 
+(12) to[fore, black,->, ] node[coordinate](38){} (14) 
+(22) to[fore, blue,->, cell=0, curve={ratio=0.1}, ] node[coordinate](39){} (24) 
+(23) to[fore, blue,->, cell=0, curve={ratio=0.1}, ] node[coordinate](40){} (24) 
+(1) to[fore, red,->, cell=0, curve={ratio=0.30000000000000004}, ] node[coordinate](41){} (22) 
+(1) to[fore, red,->, cell=0, curve={ratio=0.2}, ] node[coordinate](42){} (23) 
+(6) to[fore, blue,->, cell=0, curve={ratio=-0.2}, ] node[coordinate](43){} (33) 
+(6) to[fore, blue,->, cell=0, curve={ratio=0.2}, ] node[coordinate](44){} (33) 
+(6) to[fore, blue,->, cell=0, curve={ratio=0.2}, ] node[coordinate](45){} (30) 
+(6) to[fore, blue,->, cell=0, curve={ratio=-0.30000000000000004}, ] node[coordinate](46){} (30) 
+(15) to[fore, black,->, cell=0, ] node[coordinate](50){} (38) 
+(13) to[fore, black,->, cell=0, ] node[coordinate](51){} (38) 
+; 
+\path[->, transform shape, every edge quotes/.style={}, scale=0.7] 
+(12) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (14) 
+(1) edge["${ }$" auto=left, pos=0.5, fore, red,->, cell=0, curve={ratio=0.2}, ] (23) 
+(1) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (2) 
+(2) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (3) 
+(1) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (4) 
+(4) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (3) 
+(5) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=-0.2}, ] (2) 
+(5) edge["${ }$" auto=right, pos=0.5, fore, blue,->, curve={ratio=0.4}, ] (4) 
+(5) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=0.2}, ] (3) 
+(5) edge["${ }$" auto=left, pos=0.5, fore, red,->, ] (1) 
+(6) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (7) 
+(7) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (8) 
+(6) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (9) 
+(9) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (8) 
+(10) edge["${ }$" auto=right, pos=0.5, fore, blue,->, curve={ratio=0.4}, ] (9) 
+(10) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=-0.4}, ] (7) 
+(12) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (13) 
+(13) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (14) 
+(12) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (15) 
+(15) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (14) 
+(23) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=0.1}, ] (24) 
+(1) edge["${ }$" auto=left, pos=0.5, fore, red,->, cell=0, curve={ratio=0.30000000000000004}, ] (22) 
+(6) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=-0.2}, ] (33) 
+(6) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=0.2}, ] (33) 
+(6) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=0.2}, ] (30) 
+(6) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=-0.30000000000000004}, ] (30) 
+(15) edge["${ }$" auto=left, pos=0.5, fore, black,->, cell=0, ] (38) 
+(13) edge["${ }$" auto=left, pos=0.5, fore, black,->, cell=0, ] (38) 
+(10) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=-0.20000000000000004}, ] (6) 
+(10) edge["${ }$" auto=left, pos=0.5, fore, blue,->, curve={ratio=0.2}, ] (6) 
+(22) edge["${ }$" auto=left, pos=0.5, fore, blue,->, cell=0, curve={ratio=0.1}, ] (24) 
+; 
+\pullbackk{9}{6}{7}{draw,black} % 
+\pullbackk{4}{1}{2}{draw,black} % 
+\pullbackk{15}{12}{13}{draw,red} % 
+\end{tikzpicture}

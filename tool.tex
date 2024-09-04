@@ -1,20 +1,57 @@
 \documentclass{article}
 \usepackage{yade}
-\usepackage{hyperref}
+
 \usepackage{amsmath}
 \usepackage{ebutf8}
 
+
+
+
+\usetikzlibrary{external}
+\tikzexternalize[prefix=tikzexternalize/] %
+
+\tikzifexternalizing{}{\usepackage{hyperref}}
 \usepackage[nameinlink]{cleveref}
+
+
 
 \newtheorem{example}{Example}[section]
 \newtheorem{question}{Question}[section]
 \newtheorem{remark}{Remark}[section]
+\newtheorem{definition}{Definition}[section]
 \title{Specification of a diagrammatic reasoning tool}
 \author{Ambroise LAFONT}
 \begin{document}
 \maketitle{}
+% \begin{equation}
+% \label{eq:rew-comp}
+% test
+% \end{equation}
+% \begin{align*}
+%     \allowdisplaybreaks
+%  % YADE DIAGRAM compo-mono-ws.yade
+% GENERATED LATEX
+\input{graphs/compo-mono-ws.tex}
+% END OF GENERATED LATEX
+%  % GENERATED LATEX
+%  \input{graphs/compo-mono-ws.tex}
+%  % END OF GENERATED LATEX
+% \end{align*}
+% \end{document}
 This is a description of a tool that allows to reason graphically. 
 The user interaction process consists of two stages:
+% \[
+% \begin{tikzpicture}
+%     \node[draw] (spec) {Specification \eqref{eq:two-stages}};
+% \end{tikzpicture}
+% \]
+% \begin{equation}
+%     \label{eq:two-stages}
+%     st
+% \end{equation}
+% \end{document}
+
+
 \begin{enumerate}
     \item an algebraic specification, that is, specification of an algebraic structure;
     %  (e.g., the structure of categories).
@@ -33,27 +70,31 @@ The user interaction process consists of two stages:
 \section{Algebraic specification}
 The algebraic specification consists in two parts:
 \begin{itemize}
-    \item A sort specification, that specifies what are the different sorts of elements available in the algebraic structure.
+    \item A sort specification, consisting of a list of sort declarations that specifies what are the different sorts of elements available in the algebraic structure.
     \item A rewriting system specification, that is, a list of rewriting rules.
 \end{itemize}
 
 \begin{example}
     \label{ex:proof-mono-alg-spec}
-    Continuing \Cref{ex:proof-mono}, the sort specification would be a list of fours sorts: objects, morphisms, commutative triangles, and monomorphisms.
+    Continuing Example~\ref{ex:proof-mono}, the sort specification would be a list of fours sorts: objects, morphisms, commutative triangles, and monomorphisms.
 One rewriting rule would consist in completing 
 any composable pair of morphism can be completed to a commutative triangle.
 \end{example}
 
-From the user perspective, the algebraic specification mainly consists in drawing diagrams, where certain elements are visually "distinguished" (in this document, we will use the red color, but it could be something else).
+From the user perspective, the algebraic specification mainly consists in drawing diagrams, where certain elements are visually "distinguished". 
+In this document, we will use the red color, but it could be something else.
+Sometimes, we need to have two kinds of distinguished elements in the same diagram; for that purpose, we will use the 
+red and blue colors.
 
 
 \subsection{Sort specification}
+\label{sec:sort-specification}
 The sorts are specified one after the other.
 Each sort is specified with a diagram, where the undistinguished elements represent the \emph{dependencies} of the sort, 
 while the distinguished elements determine how this new sort should be represented.
 % When two sorts have the same dependencies, one can be "marked" as a subsort of the other.
 \begin{example}
-    Let us detail the sort specification of \Cref{ex:proof-mono-alg-spec}.
+    Let us detail the sort specification of Example~\ref{ex:proof-mono-alg-spec}.
     \begin{description}
         \item[Objects]
         The sort has no dependencies, and we want to represent them as vertices, so the diagram would be:
@@ -93,8 +134,9 @@ while the distinguished elements determine how this new sort should be represent
 
     
 \end{example}
-\subsection{Rewriting rules}
-\subsubsection{First-order rules}
+We will see how to introduce proof-irrelevant sorts, such as the monomorphic tag (\cref{sec:proof-irrelevant}), or functional relations, such as composition of morphisms 
+(\cref{sec:functional-relations}).
+\subsection{First-order rewriting rules}
 A rewriting rule is specified as a \emph{rewriting diagram}, where the non distinguished part is the pattern. The idea is that when this pattern is found in the workspace (we call this a \emph{match}), the workspace can be extended with the distinguished part.
 
 \begin{remark}
@@ -127,6 +169,10 @@ A rewriting diagram may also include equality tags between elements with the sam
 \label{eq:rew-comp}
 \tag{Comp}
 \end{equation}
+
+%      \end{description}
+% \end{example}
+		    % \begin{comment}
 
 \item[Monomorphic property]
 \begin{equation}
@@ -183,13 +229,67 @@ are related by the equality tag.
 \begin{question}
     What about identities? custom labelling of nodes?
 \end{question}
-% \paragraph{Creation of new admissible rewriting rules}
+\subsubsection{Proof-irrelevant sorts}
+\label{sec:proof-irrelevant}
+\begin{definition}
+    A sort is said \emph{proof-irrelevant} if there is a rewrite rule 
+    that makes it unique, given the same dependencies.        
+\end{definition}
+A proof-irrelevant tag can be introduced in the sort declaration 
+with an exclamation mark.
+\begin{example}
+    The monomorphism tag is proof-irrelevant.
+    \begin{equation*}
+    % YADE DIAGRAM mono-proof-irrelevant.yade
+    % GENERATED LATEX
+    \input{graphs/mono-proof-irrelevant.tex}
+    % END OF GENERATED LATEX
+    \end{equation*}
+    That is, we have the following rule, where equality relates the two monomorphism tags.
+    \begin{equation}
+    % YADE DIAGRAM mono-proof-irrelevant-rule.yade
+    % GENERATED LATEX
+    \input{graphs/mono-proof-irrelevant-rule.tex}
+    % END OF GENERATED LATEX
+    \label{eq:rew-mono-proof-irrelevant}
+    \tag{MonoIrr}
+    \end{equation}
+\end{example}
+
+\subsubsection{Functional relations}
+\label{sec:functional-relations}
+Some proof-irrelevant sorts are also used to 
+introduce a functional relation.
+In that case we could compact everything in
+the sort declaration.
+\begin{example}
+    The sort witnessing composition can be declared 
+    with the following diagram.
+    \[
+    % YADE DIAGRAM composition-functional.yade
+    % GENERATED LATEX
+    \input{graphs/composition-functional.tex}
+    % END OF GENERATED LATEX
+    \]
+    The red stuff is the new sort.
+    The blue stuff is what can be constructed from the black stuff. 
+    This diagram should be understood as the combination of the following 
+    rules.
+    \[
+    % YADE DIAGRAM composition-functional-rules.yade
+    % GENERATED LATEX
+    \input{graphs/composition-functional-rules.tex}
+    % END OF GENERATED LATEX
+    \]
+\end{example}
+\subsubsection{Creation of new admissible rewriting rules}
 The user has two ways of creating new admissible rewriting rules, that is, rules that are valid in any model of the original set of rewrting rules.
 \begin{description}
     \item[Chaining] Chaining rewriting rules;
     \item[Pruning] Removing distinguished elements from a rewriting diagram.
 \end{description}
-\paragraph{Example: the composition of two monomorphisms is monomorphic}
+\subsubsection{Example: composition of monomorphisms}
+Monomorphisms compose.
 In this section, we show that the previous set of rewriting rules is enough to build the following rewriting rule, that shows that the composition of two monomorphisms is monomorphic.
 \begin{align}
     % YADE DIAGRAM compo-mono-simplest-rule.yade
@@ -198,6 +298,7 @@ In this section, we show that the previous set of rewriting rules is enough to b
     % END OF GENERATED LATEX
     \label{eq:compo-mono-simplest-rule}
 \end{align}
+% \end{comment}
 
 We start by chaining rewriting rules as follows.
 We use blue to denote a match, and the red color 
@@ -225,17 +326,24 @@ This sequence is compactified by the software into a single rewriting rule:
 \end{align}
 By removing distinguished elements, we recover the above rewriting rule \eqref{eq:compo-mono-simplest-rule}.
 
-\subsubsection{Second-order rewriting rules}
+\begin{question}
+We could have a way to automatically apply some rules when possible, like the associativity rule?
+\end{question}
+\subsection{Second-order rewriting rules}
 The admissible rewriting rule \eqref{eq:compo-mono-simplest-rule} shows that the composition of two monomorphisms is monomorphic.
 This makes following rewriting rule legitimate:
-\[
+\begin{equation}
 % YADE DIAGRAM compo-mono-second-order.yade
 % GENERATED LATEX
 \input{graphs/compo-mono-second-order.tex}
 % END OF GENERATED LATEX
-\]
+\tag{MarkMono}
+\label{eq:mark-mono}
+\end{equation}
 Unfortunately, there is no way to deduce this rule using the chaining and pruning mechanisms.
 
+% CA MARCHE
+% \end{document}
 The formula that we would like to account is of the following shape:
 \[
 % YADE DIAGRAM mono-so-formula.yade
@@ -246,8 +354,80 @@ The formula that we would like to account is of the following shape:
 It does not fit the format $∀ .. ∃ .. P$ of our previous rewriting rules (see \Cref{rem:formula-fo}).
 
 This motivates what we call \emph{second-order rewriting rules}, which handles formulae of the shape above, where 
-the second line can occur many time. That is,we handle formulae of the shape $∀ (∀ ∃ .. )^* ∃ .. $.
-    \subsubsection{Third-order order rules and beyond}
+the second line can occur many time. That is, we handle formulae of the shape $∀ (∀ ∃ .. )^* ∃ .. $.
+\subsubsection{Sort definition}
+\label{sec:sort-definition}
+Second-order rules are typically useful to characterise proof-irrelevant sorts by their defining properties.
+
+This motivates a new scheme: on the left, we have a sort declaration as in \ref{sec:sort-specification}, and on the right, we have a list of rewriting rules that characterise this sort.
+For example we can define the sort of monomorphisms as follows:
+\[
+% YADE DIAGRAM mono-so-sort.yade
+% GENERATED LATEX
+\input{graphs/mono-so-sort.tex}
+% END OF GENERATED LATEX
+\]
+In this case we have only one rule on the right.
+This rule has two kinds of distinguished elements: in blue, the universally quantified, in red, the existentially quantified ones. The non-distinguished elements must be exactly the same as the left diagram.
+
+This scheme actually defines three rules at once: 
+\begin{enumerate}
+    \item proof-irrelevance for monicity (rule~\eqref{eq:rew-mono-proof-irrelevant});
+    \item the first-order rule \eqref{eq:rew-mono-fo} that can be 
+    used when given a morphism marked as monic;
+    \item the second-order rule \eqref{eq:mark-mono} that can be used to mark a morphism as monic.
+\end{enumerate}
+
+
+Let us do the example of pullbacks.
+\[
+% YADE DIAGRAM pullback-so-sort.yade
+% GENERATED LATEX
+\input{graphs/pullback-so-sort.tex}
+% END OF GENERATED LATEX
+\]
+So here we have three rules. Note that the fact a pullback square commutes is not enforced by the dependency relation, but by the first rule. 
+
+The alternative is of course possible; then we don't need the first of the three diagrams. Let us present the other version below.
+Let us allow that in the rewriting rules, we can omit some non-distinguished part (here, the "inside" of the pullback square) for legibility.
+% ; the software should be able to infer those missing parts automatically, from the left handside.
+\[
+% YADE DIAGRAM pullback-so-sort-2.yade
+% GENERATED LATEX
+\input{graphs/pullback-so-sort-2.tex}
+% END OF GENERATED LATEX
+\]
+
+\subsubsection{Uniqueness property}
+In a sort definition as above, we allow some of the rules to be marked as "unique" using an exclamation mark.
+The meaning is that it adds another rule whose underlying diagram consists of the red stuff and its dependencies, but the red stuff is duplicated.
+Now, turn all the red stuff into blue, and adds red equalities between pairs of duplicated blue stuff.
+
+For example, pullbacks can be defined as follows.
+\[
+% YADE DIAGRAM pullback-so-sort-3.yade
+% GENERATED LATEX
+\input{graphs/pullback-so-sort-3.tex}
+% END OF GENERATED LATEX
+\]
+The second rule marked with "!" will then generate the following new rule.
+\[
+% YADE DIAGRAM pullback-so-sort-newrule.yade
+% GENERATED LATEX
+\input{graphs/pullback-so-sort-newrule.tex}
+% END OF GENERATED LATEX
+\]
+It has more equalities than the one in the original sort definition,
+since it adds spurious equalities between composition witnesses (two-cells), which 
+are already proof-irrelevant.
+
+\subsubsection{Beyond sort definitions}
+All the examples of second-order rewriting rules we've seen so far
+were sort definitions.
+But there are also cases were it would be a bit artificial to introduce a sort, where we would like to use second-order rewriting rules, see Equation~\eqref{eq:quotient-arrow}
+
+
+    \subsection{Third-order order rules and beyond}
 One may worry that second-order rules are not strong enough to capture all the possible rewriting rules that we want. What if we want additional nesting of quantifiers, like the third-order rewriting rule below?
 \begin{equation}
     \label{eq:third-order}
@@ -255,6 +435,8 @@ One may worry that second-order rules are not strong enough to capture all the p
 ⇒ ∃.. R 
 \end{equation}
 In fact, we can "emulate" them with second-order rewriting rules with a trick: we can introduce a new sort, and use it to represent the inner quantifiers\footnote{Intriguingly enough, github copilot correctly guessed the end of this sentence, after I wrote "emulate them".}. 
+
+\subsubsection{Reduction to second-order rewriting rules}
 
 Let us illustrate this trick with \Cref{eq:third-order}.
 We introduce a new sort $S$ depending on $x,y$ such that
@@ -268,6 +450,7 @@ so that \Cref{eq:third-order} is equivalent to the following second-order rule:
     ∀ x. \left(∀y(s:S(x,y)) ∃..Q  \right) ⇒ ∃.. R
 \]
 
+
 Now, let us explain how we can enforce the equivalence of
 \Cref{eq:sort-equivalence}.
 For the left-to-right implication, a first-order rewriting rule is enough:
@@ -280,9 +463,20 @@ For the reverse implication, we can write a second order rewriting rule:
     ∀xy(∀ z ∃ w. P)\   ⇒ ∃s:S(x,y)  \
 \]
 
+\subsubsection{The second-order thesis}
+Not only can third-order rewriting rules be emulated with second-order rules and new sorts, as shown by the previous section, but we claim that this is what mathematicians actually do in practice: they never work with third-order statements; they would rather introduce an intermediate definition to flatten any statement.
+This claim is what we call the \emph{second-order thesis}. Happy to hear if you have any counter-example.
+
+% CA MARCHE
+% \end{document}
+
+\section{Semantics}
+A sort specification corresponds to a finite direct category. 
+A diagram with distinguished elements corresponds to a 
+natural transformation between two functors from this category to the category of sets.
 \section{Internal representation}
 A diagram is stored as a graph: 
-each element in the graph is a node, and each dependency is an edge.
+each element in the graph is a node, and each dependency is an edge\footnote{Semantically, this is the graph underlying the category of elements of the presheaf.}.
 For example, the following diagram below left is represented as the graph below right:
 \[
 % YADE DIAGRAM representation-graph.yade
@@ -291,11 +485,74 @@ For example, the following diagram below left is represented as the graph below 
 % END OF GENERATED LATEX
 \]
 Looking for a match can be done at the level of this graph representation.
-\section{Semantics}
-A sort specification corresponds to a finite direct category. 
-A diagram with distinguished elements corresponds to a 
-natural transformation between two functors from this category to the category of sets.
 \appendix
+\section{Abelian categories} 
+Objects and morphisms, pullbacks, epimorphisms.
+
+\subsection{Zero}
+\[
+% YADE DIAGRAM zero-sort.yade
+% GENERATED LATEX
+\input{graphs/zero-sort.tex}
+% END OF GENERATED LATEX
+\]
+Note that this sort definition enforces both existence 
+and uniqueness of the initial/terminal morphism.
+
+To simplify the notations, we will mark a zero object 
+with a label "0" in the following diagrams.
+The software should provide a way to ensure this.
+
+Let us define zero morphisms.
+\[
+% YADE DIAGRAM zero-morphism.yade
+% GENERATED LATEX
+\input{graphs/zero-morphism.tex}
+% END OF GENERATED LATEX
+\]
+\subsection{Chain complex}
+\[
+% YADE DIAGRAM chain-complex.yade
+% GENERATED LATEX
+\input{graphs/chain-complex.tex}
+% END OF GENERATED LATEX
+\]
+\subsection{Exact}
+\[
+% YADE DIAGRAM exact-sort.yade
+% GENERATED LATEX
+\input{graphs/exact-sort.tex}
+% END OF GENERATED LATEX
+\]
+\subsection{Diagram chasing rules}
+
+The following rules provide some rules 
+for diagram chasing (it is by no mean exhaustive).
+\subsubsection{Sort specification}
+\[
+% YADE DIAGRAM sort-chasing.yade
+% GENERATED LATEX
+\input{graphs/sort-chasing.tex}
+% END OF GENERATED LATEX
+\]
+\subsubsection{Rewriting rules}
+\[
+% YADE DIAGRAM epi-diagram-chase.yade
+% GENERATED LATEX
+\input{graphs/epi-diagram-chase.tex}
+% END OF GENERATED LATEX
+\]
+And now this is a second-order rewriting rule.
+\begin{equation}
+% YADE DIAGRAM quotient-arrow-chase.yade
+% GENERATED LATEX
+\input{graphs/quotient-arrow-chase.tex}
+% END OF GENERATED LATEX
+\label{eq:quotient-arrow}
+\end{equation}
+
+
+
 \section{Attempts to simplify the proof that monomorphisms compose}
 The last attempt is pretty convincing; it we require tactics.
 \label{app:simplified-proof}
@@ -343,6 +600,9 @@ The idea is that we keep all the elements that depend on the selected elements, 
 % END OF GENERATED LATEX
 \]
 
+% CA MARCHE
+% \end{document}
+
 Maybe names could help, to remember stuff...
 \paragraph{A version with hide tactical}
 We assume that we have a tactic \textsc{Apply-Hide} that takes as input 
@@ -357,95 +617,6 @@ and then hide the objects.
 \]
 
 \end{document}
-\section{leftovers}
-For example, if
-Let us start with 
- \[
-% YADE DIAGRAM two-mono.yade
-% GENERATED LATEX
-% \input{graphs/two-mono.tex}
-% END OF GENERATED LATEX
-\]
-Prop
-
-, creation of an initial workspace, and a reasoning mode.
-
-In the first stage, the user defines the algebraic structure in which they want to reason about (for examples, the structure of categories).
-In the second stage, 
-
-The user can create a workspace, and add elements to it (e.g, drawing two monomorphisms).
-\[
-% YADE DIAGRAM two-mono.yade
-% GENERATED LATEX
-% \input{graphs/two-mono.tex}
-% END OF GENERATED LATEX
-\]
-Then he enters a reasoning mode, where he can apply rewriting rules to modify the workspace, 
-resulting in a new state (e.g., the composite arrow is a mono).
-\[
-% YADE DIAGRAM two-mono-composite-mono.yade
-% GENERATED LATEX
-\input{graphs/two-mono-composite-mono.tex}
-% END OF GENERATED LATEX
-\]
-
-The different kinds of elements as well as the set of rewriting rules are defined a priori by the user.
-The workspace is parameterised by two things:
-\begin{itemize}
-    
-\item The kind of elements that can be added to the workspace is defined by a \emph{sort specification}.
-
-Formally, this can be seen as type-theoretic list of dependent sorts, or as a finite direct category.
-\item Then, the available rewriting rules are defined by a \emph{rewriting system specification}.
-Both of them can be specified by the user. 
-\end{itemize}
-
-\end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

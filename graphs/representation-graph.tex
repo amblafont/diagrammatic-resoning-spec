@@ -1,0 +1,59 @@
+\begin{tikzpicture}[every node/.style={outer sep=0pt,anchor=base,text height=1.2ex, text depth=0.25ex}] 
+\node[inner sep=5pt] (0) at (11.904761904761905em, -11.904761904761905em) {$\bullet$} ; 
+\node[inner sep=5pt] (1) at (16.666666666666668em, -7.142857142857143em) {$\bullet$} ; 
+\node[inner sep=5pt] (2) at (21.428571428571427em, -11.904761904761905em) {$\bullet$} ; 
+\node[inner sep=5pt] (3) at (23.904761904761905em, -5.038690476190476em) {$ $} ; 
+\node[inner sep=5pt] (4) at (23.904761904761905em, -14.133928571428571em) {$ $} ; 
+\node[inner sep=5pt] (5) at (28.61904761904762em, -12.467261904761905em) {$ob$} ; 
+\node[inner sep=5pt] (6) at (42.38095238095238em, -12.37202380952381em) {$ob$} ; 
+\node[inner sep=5pt] (7) at (35.666666666666664em, -12.467261904761905em) {$mor$} ; 
+\node[inner sep=5pt] (8) at (35.333333333333336em, -4.705357142857143em) {$ob$} ; 
+\node[inner sep=5pt] (9) at (39.76190476190476em, -8.705357142857142em) {$mor$} ; 
+\node[inner sep=5pt] (10) at (31.19047619047619em, -8.75297619047619em) {$mor$} ; 
+\node[inner sep=5pt] (11) at (26.238095238095237em, -5.705357142857143em) {$mono$} ; 
+\node[inner sep=5pt] (12) at (35.714285714285715em, -9.419642857142858em) {$triangle$} ; 
+\path 
+(0) to[fore, black,->, into, ] node[coordinate](13){} (1) 
+(1) to[fore, black,->, ] node[coordinate](14){} (2) 
+(0) to[fore, black,->, ] node[coordinate](15){} (2) 
+(3) to[fore, black,-,] node[coordinate](16){} (4) 
+(7) to[fore, black,->, ] node[coordinate](17){} (5) 
+(7) to[fore, black,->, ] node[coordinate](18){} (6) 
+(9) to[fore, black,->, ] node[coordinate](19){} (8) 
+(9) to[fore, black,->, ] node[coordinate](20){} (6) 
+(10) to[fore, black,->, ] node[coordinate](21){} (8) 
+(10) to[fore, black,->, ] node[coordinate](22){} (5) 
+(11) to[fore, black,->, ] node[coordinate](23){} (10) 
+(12) to[fore, black,->, ] node[coordinate](24){} (8) 
+(12) to[fore, black,->, ] node[coordinate](25){} (10) 
+(12) to[fore, black,->, ] node[coordinate](26){} (5) 
+(12) to[fore, black,->, ] node[coordinate](27){} (7) 
+(12) to[fore, black,->, ] node[coordinate](28){} (6) 
+(12) to[fore, black,->, ] node[coordinate](29){} (9) 
+(11) to[fore, black,->, curve={ratio=-0.1}, ] node[coordinate](30){} (8) 
+(11) to[fore, black,->, curve={ratio=0.2}, ] node[coordinate](31){} (5) 
+(1) to[fore, black,->, cell=0.2, ] node[coordinate](32){} (15) 
+; 
+\path[->] 
+(0) edge["${\scriptstyle }$", pos=0.5, fore, black,->, into, ] (1) 
+(1) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (2) 
+(0) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (2) 
+(3) edge["${\scriptstyle }$", pos=0.5, fore, black,-,] (4) 
+(7) edge["${\scriptstyle source}$", pos=0.5, fore, black,->, ] (5) 
+(7) edge["${\scriptstyle target}$"', pos=0.5, fore, black,->, ] (6) 
+(9) edge["${\scriptstyle source}$"', pos=0.5, fore, black,->, ] (8) 
+(9) edge["${\scriptstyle target}$", pos=0.5, fore, black,->, ] (6) 
+(10) edge["${\scriptstyle target}$", pos=0.5, fore, black,->, ] (8) 
+(10) edge["${\scriptstyle source}$"', pos=0.5, fore, black,->, ] (5) 
+(11) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (10) 
+(12) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (8) 
+(12) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (10) 
+(12) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (5) 
+(12) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (7) 
+(12) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (6) 
+(12) edge["${\scriptstyle }$", pos=0.5, fore, black,->, ] (9) 
+(11) edge["${\scriptstyle }$", pos=0.5, fore, black,->, curve={ratio=-0.1}, ] (8) 
+(11) edge["${\scriptstyle }$", pos=0.5, fore, black,->, curve={ratio=0.2}, ] (5) 
+(1) edge["${\scriptstyle }$", pos=0.5, fore, black,->, cell=0.2, ] (15) 
+; 
+\end{tikzpicture}

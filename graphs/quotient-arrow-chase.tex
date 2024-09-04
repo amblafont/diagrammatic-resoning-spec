@@ -1,0 +1,32 @@
+\begin{tikzpicture}[every node/.style={outer sep=0pt,anchor=base,text height=1.2ex, text depth=0.25ex}] 
+\node[inner sep=5pt] (0) at (18.229166666666668em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (1) at (23.4375em, -7.8125em) {$\bullet$} ; 
+\node[inner sep=5pt] (2) at (23.4375em, -13.020833333333334em) {$\bullet$} ; 
+\node[inner sep=5pt] (3) at (16.302083333333336em, -6.312499046325684em) {$\textcolor{blue}{-}$} ; 
+\node[inner sep=5pt] (4) at (23.28125em, -6.3645823796590175em) {$0$} ; 
+\node[inner sep=5pt] (5) at (23.385416666666668em, -14.802082379659018em) {$0$} ; 
+\node[inner sep=5pt] (6) at (26.510416666666668em, -9.645832379659018em) {$\Rightarrow$} ; 
+\node[inner sep=5pt] (7) at (30.755208333333336em, -7.942708333333334em) {$\bullet$} ; 
+\node[inner sep=5pt] (8) at (35.96354166666667em, -7.942708333333334em) {$\bullet$} ; 
+\node[inner sep=5pt] (9) at (35.96354166666667em, -13.151041666666668em) {$\bullet$} ; 
+\path 
+(0) to[fore, black,onto, ] node[coordinate](10){} (1) 
+(0) to[fore, black,->, ] node[coordinate](11){} (2) 
+(3) to[fore, blue,->, mapsto,] node[coordinate](12){} (4) 
+(3) to[fore, red,->, mapsto,] node[coordinate](13){} (5) 
+(7) to[fore, black,onto, ] node[coordinate](14){} (8) 
+(7) to[fore, black,->, ] node[coordinate](15){} (9) 
+(8) to[fore, red,->, ] node[coordinate](16){} (9) 
+(8) to[fore, red,->, cell=0.05, ] node[coordinate](17){} (15) 
+; 
+\path[->, transform shape, every edge quotes/.style={}, scale=0.7] 
+(0) edge["${ }$" auto=left, pos=0.5, fore, black,onto, ] (1) 
+(0) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (2) 
+(3) edge["${ }$" auto=left, pos=0.5, fore, blue,->, mapsto,] (4) 
+(3) edge["${ }$" auto=left, pos=0.5, fore, red,->, mapsto,] (5) 
+(7) edge["${ }$" auto=left, pos=0.5, fore, black,onto, ] (8) 
+(7) edge["${ }$" auto=left, pos=0.5, fore, black,->, ] (9) 
+(8) edge["${ }$" auto=left, pos=0.5, fore, red,->, ] (9) 
+(8) edge["${ }$" auto=left, pos=0.5, fore, red,->, cell=0.05, ] (15) 
+; 
+\end{tikzpicture}

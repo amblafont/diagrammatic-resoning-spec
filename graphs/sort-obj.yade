@@ -1,1 +1,1 @@
-{"graph":{"latexPreamble":"\\newcommand{\\coqproof}[1]{\\checkmark}","tabs":[{"active":true,"edges":[],"nodes":[{"id":0,"label":{"isMath":true,"label":"\\textcolor{red}{\\bullet}","pos":[250,150],"zindex":0}}],"sizeGrid":100,"title":"1"}]},"version":12}
+{"graph":{"activeTabId":0,"latexPreamble":"\\newcommand{\\coqproof}[1]{\\checkmark}","nextTabId":1,"tabs":[{"edges":[],"id":0,"nextGraphId":1,"nodes":[{"id":0,"label":{"isMath":true,"label":"\\textcolor{red}{\\bullet}","pos":[250,150],"zindex":0}}],"sizeGrid":100,"title":"1"}]},"version":13}
