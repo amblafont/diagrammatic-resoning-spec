@@ -8,7 +8,7 @@
 
 
 \usetikzlibrary{external}
-\tikzexternalize[prefix=tikzexternalize/] %
+% \tikzexternalize[prefix=tikzexternalize/] %
 
 \tikzifexternalizing{}{\usepackage{hyperref}}
 \usepackage[nameinlink]{cleveref}
@@ -351,10 +351,10 @@ The formula that we would like to account is of the following shape:
 \input{graphs/mono-so-formula.tex}
 % END OF GENERATED LATEX
 \] 
-It does not fit the format $∀ .. ∃ .. P$ of our previous rewriting rules (see \Cref{rem:formula-fo}).
+It does not fit the format\footnote{There is a logic called the calculus of conditions where this can be made formal (see "Conditional reactive systems").} $∀ .. ∃ .. P$ of our previous rewriting rules (see \Cref{rem:formula-fo}).
 
 This motivates what we call \emph{second-order rewriting rules}, which handles formulae of the shape above, where 
-the second line can occur many time. That is, we handle formulae of the shape $∀ (∀ ∃ .. )^* ∃ .. $.
+the second line can occur many time. That is, we handle formulae of the shape $∀ (∀ ∃ .. )^* ⇒ ∃ .. $.
 \subsubsection{Sort definition}
 \label{sec:sort-definition}
 Second-order rules are typically useful to characterise proof-irrelevant sorts by their defining properties.
