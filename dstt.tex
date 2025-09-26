@@ -1,0 +1,229 @@
+\documentclass{article}
+
+% Packages
+% \usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}
+\usepackage{ebutf8}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+% \usepackage{amssymb}
+% \usepackage{graphicx}
+\usepackage{hyperref}
+% \usepackage{cleveref}
+% \usepackage{geometry}
+% \usepackage{setspace}
+
+% Define example environment
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+
+
+% Page setup
+% \geometry{margin=1in}
+% \onehalfspacing
+
+% Title information
+\title{A logical framework for dependent sort specifications and their finite models}
+\author{Ambroise LAFONT}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+We present a logical framework for specifying dependent sort specifications (which we call \emph{schemas}) 
+and their finite models (which we call \emph{complexes}, as in \cite{leenasubramaniam}).
+This is inspired by Uemura's logical framework for SOGATs~\cite{DBLP:journals/mscs/Uemura23}.
+\begin{example}
+    \label{excat}
+    A sort specification for categories can be given as follows:
+    \begin{itemize}
+        \item $ob: 𝐒𝐞𝐭$
+        \item $hom: ob → ob → 𝐒𝐞𝐭$
+        \item $id: ∏ x: ob. hom(x, x) → 𝐒𝐞𝐭$
+        \item $comp: ∏ x, y, z: ob. hom(x, y) → hom(y, z) → hom(x, z) → 𝐒𝐞𝐭$
+    \end{itemize}
+Here is an example of a finite model, or complex:
+    \begin{itemize}
+        \item $a:ob$
+        \item $b:ob$
+        \item $f:hom(a, a)$
+        \item $g:hom(b, a)$
+        \item $id_f:id(f)$
+    \end{itemize}    
+\end{example}
+
+Clearly those specifications look like 
+some contexts of some domain specific type theory.
+We sketch how to make it formal here.
+\paragraph{Disclaimer} I am not sure how original this is;
+it may just be a reformulation of Makkai's FOLDS~\cite{MakkaiFirstOL}.
+
+\section{Logical framework}
+\subsection{Informal description}
+A schema is intuitively a context of (dependent) sort declarations where
+each variable has a type of the shape $∏_{a_1:A_1} … ∏_{a_n:A_n} 𝐒𝐞𝐭$.
+We may write this type as $Δ → 𝐒𝐞𝐭$, where $Δ$ is the context 
+$(a_1 : A_1, …, a_n : A_n)$. Since all sort declarations end with 
+"$→ 𝐒𝐞𝐭$", we may as well omit this part. To sum up, a schema is a context 
+$x_1 : Δ₁, … x_p : Δₚ$. Now, each $Δᵢ$ describes a complex (or finite model) over the schema
+$(x_1 : Δ₁, …, x_{i-1}:Δ_{i-1})$.
+\begin{example}
+ Let us reformulate the beginning of Example~\ref{excat} with this notation.
+ The models of $ob:()$ are sets.
+ We have $\hom : (a:ob, b:ob)$. Note that $(a:ob, b:ob)$ can be interpreted as a finite model 
+ of $ob:()$, that is, the finite set with two elements $a$ and $b$. A model of $ob,hom$ is a graph.
+ Next, we have $id : (x:ob, f:hom(x,x))$. Again, $(x:ob, f:hom(x,x))$ can be interpreted as the finite graph consisting of one looping arrow.
+\end{example}
+
+\subsection{Judgements}
+\begin{itemize}
+    \item $Γ ⊢$ means that $Γ$ is a schema.
+\item $Γ| Δ ⊢$ means that $Δ$ is a complex over the schema $Γ$;
+\item $Γ | Δ ⊢ A$ means that $A$ is a sort in context $Γ | Δ ⊢$.
+ \item $Γ | Δ ⊢ σ ⇒ Δ'$ means that $σ$ is a substitution from the complex $Δ$ to the complex $Δ'$.
+ \item $Γ ⊢ t : Δ$ means that the term $t$ has type $Δ$ in $Γ$. In fact, recalling our shortcut notation, we shall actually think of $t$ as a term of type $Δ → 𝐒𝐞𝐭$.
+
+\item $Γ | Δ ⊢ t : A$ means that $t$ is a term of type $A$.
+
+\end{itemize}
+Note that we have two distinct judgements for terms: the first one lives in a schema, while the 
+second one lives in a complex depending of some schema.
+
+\subsection{Typing rules}
+There are the obvious context extension rules for schemas and complexes.
+\[
+\dfrac{Γ|Δ⊢}{Γ,x:Δ}
+\qquad 
+\dfrac{Γ|Δ⊢A}{Γ|Δ,x:A ⊢}
+\]
+We have the obvious variable rules for schemas and complexes
+\[
+\dfrac{(x : Δ) ∈ Γ}{Γ⊢x:Δ}
+\qquad 
+\dfrac{(x:A)∈Δ}{Δ⊢x:A}
+\]
+In fact this is the only rule for terms! 
+In other words, \textbf{all terms are variables}.
+
+We omit the rules for building substitutions between complexes (substitutions are suitable lists of terms) which are standard.
+The most important rule is the sort formation rule: 
+\[
+\dfrac{Γ⊢t : Δ'\quad Γ| Δ⊢σ ⇒ Δ'}{Γ|Δ⊢t(σ)}
+\]
+This rule makes sense if we think of $t:Δ'$ as $t:Δ' → 𝐒𝐞𝐭$.
+\begin{remark}
+    The notational convention consisting in 
+    omitting the part "$→𝐒𝐞𝐭$" may look confusing.
+    The main benefit is that we don't have to give $𝐒𝐞𝐭$ a meaning, 
+    thus it makes the semantics of the logical framework simpler.
+\end{remark}
+\subsection{Rocq formalisation}
+Matthieu Piquerez has a formalization of the logical framework
+based on raw syntax based on lists of natural numbers, with 
+\begin{itemize}
+    \item well-formed boolean predicates;
+    \item a Ltac DSL as an interface to build contexts;
+    \item pushouts of complexes (morphisms are substitutions between complexes).
+\end{itemize} 
+\subsection{
+Semantics
+}
+It is well-known that schemas correspond to certain kind of finite categories called \emph{simple}.
+Then, the category of models of a schema is equivalent (but not isomorphic) to a 
+category of functors from the corresponding simple category to $𝐒𝐞𝐭$.
+\begin{example}
+    A model of $ob:(), hom: (a:ob,b:ob)$ is a graph, that is: a set of vertices $ob$ and a set of edges $hom$ indexed by $ob × ob$.
+    The corresponding simple category is $⇉$, and a functor to $𝐒𝐞𝐭$ consists of 
+    a set of objects $ob$, a set of arrows $hom$, and two maps $dom, codom : hom → ob$.
+\end{example}
+\begin{remark}
+    As argued before, a complex can be thought of as a finite model of a schema, or a "finite" functor $F$ from a simple category $C$ to $𝐒𝐞𝐭$. The length of the complex is exactly the cardinal 
+    of $∑_{c∈C} F(c)$. For example, the complex $a:ob, b:ob, f:hom(a,b)$ is of size 3.
+\end{remark}
+
+A schema $Γ$ can be interpreted as:
+\begin{itemize}
+    \item a simple category $C_Γ$;
+    \item a category of models $⟦Γ ⟧$, which is equivalent to $[C,𝐒𝐞𝐭]$,
+\end{itemize}
+A complex $Γ|Δ$ can be interpreted as an object $⟦Δ⟧$ of the category of models of $Γ$, or more abstractly, as a functor\footnote{This is a route followed by \cite{DBLP:journals/corr/AltenkirchCDF16}} from $Γ$ to $𝐒𝐞𝐭$. Indeed, any object induces such a functor $yΔ$ by the Yoneda embedding.
+
+
+The context $⟦Γ,x:Δ ⟧$ can be interpreted 
+as the category $(γ:⟦Δ⟧) × 𝐒𝐞𝐭^{\hom(⟦Δ⟧,γ)}$.
+
+Again, a type $Γ | Δ ⊢ A$ can be interpreted as an object $⟦A⟧$ of the coslice category $⟦Δ⟧ / ⟦Γ⟧$.
+Then, we can define  $⟦Γ|Δ,x:A^+⟧$ as the coslice category $⟦A ⟧ / ⟦Γ⟧$.
+
+
+The interpretation of terms is then derived: they are sections of the projections from extended contexts to the base context.
+
+Substitution between schemas must be interpreted as adjunctions between categories of models,
+so that substituted complexes are interpreted by applying the left adjoint to the original complex.
+The most interesting part is the interpretation of the application rule (TODO: provide some details.).
+
+This intepretation yields a model of the logical framework. This model which should actually be equivalent to the syntactic model. In particular, any simple category should 
+induce a syntactic schema, and any finite model should induce a syntactic complex.
+\section{A single-context logical framework}
+
+In the provided semantics, there is some redundancy, in the sense that the interpretation 
+of a complex is very similar to the interpretation of a type. 
+In this section, we present a single-context logical framework, with simpler semantics, where 
+contexts are no longer of the shape $Γ|Δ$, but just some $Γ$.
+Contrary to the previous logical framework which cleanly separates schemas and complexes,
+the context can now interleave sort declarations and 
+complex declarations, so that the following context is valid:
+$ob:𝐒𝐞𝐭, a:ob, hom : ob → ob → 𝐒𝐞𝐭$.
+The interest of this single version is that:
+\begin{itemize}
+    \item The semantics of this logical framework is simpler in some respect;
+    \item Any model of this logical framework induces a model 
+    of the previous one\footnote{In particular, by initiality/recursion, we have a syntactic translation from the two-context logical framework to the single-context logical framework.}.
+\end{itemize}
+Therefore, we can exhibit a model of the original 2-context version from a model of the 
+1-context version.
+
+
+\subsection{Polarities}
+A context is a list of variable declarations
+$x_1 : A_1^{+/-}, …, x_n : A_n^{+/-}$, that is,
+each variable $x_i$ has an associated type $A_i$ and a "polarity" $+$ or $-$. 
+A negative declaration $x:A^-$ means that we should think of $x$ as of type $A⁺ → 𝐒𝐞𝐭$, so that we 
+have the following application rule 
+\[
+\dfrac{Γ⊢t:A^- \quad Γ⊢δ:A^+}{Γ⊢t(δ)}
+\]
+We have two extension rules for contexts, depending on the chosen polarity
+\[
+\dfrac{Γ⊢A}{Γ,x:A^+ ⊢}
+\qquad 
+\dfrac{Γ⊢A}{Γ,x:A^- ⊢}
+\]
+Note that we have two term judgements $Γ⊢t:A^+$ and $Γ⊢t:A^-$, depending on the polarity.
+\subsection{Type formers}
+We assume a unit type and a sigma type with domain in a positive type. 
+\[
+\dfrac{}{Γ ⊢ 1}
+\qquad 
+\dfrac{Γ ⊢ A^+ \quad Γ, a:A^+ ⊢ B}{Γ ⊢ ∑_{x:A} B}
+\]
+Such that we have projections and pairing as usual for $(∑_{x:A})^+$, and a unique term
+$Γ ⊢ * : 1⁺$.
+
+\subsection{Example: categories}
+The context for categories is: 
+$
+ob:1^-, hom: (ob × ob)⁻ 
+, id : (∑_{x:ob} hom(x,x))^-
+$
+
+\subsection{Semantics}
+The semantics is similar to the 2-context version, although we can no longer directly interpret 
+a context as a simple category since we can interleave positive and negative declarations.
+
+\bibliographystyle{IEEEtran}
+\bibliography{bib}
+
+\end{document}
