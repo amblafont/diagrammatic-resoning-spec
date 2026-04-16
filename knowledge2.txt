@@ -1,0 +1,46 @@
+\knowledge{notion}
+ | modder
+
+\knowledge{notion}
+ | end user
+
+\knowledge{notion}
+ | semantic element
+
+\knowledge{notion}
+ | diagram element
+ | diagram elements
+
+\knowledge{notion}
+ | equivalent
+
+
+\knowledge{notion}
+ | schema
+
+\knowledge{notion}
+ | complex
+
+\knowledge{notion}
+ | diagram
+
+\knowledge{notion}
+ | Semantic rules
+
+\knowledge{notion}
+ | Data rules
+ | data rules
+ | data rule
+
+\knowledge{notion}
+ | propositional
+
+\knowledge{notion}
+ | Equality rules
+ | equality rules
+
+\knowledge{notion}
+ | backward
+
+\knowledge{notion}
+ | forward
